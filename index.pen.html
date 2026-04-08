@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Kenia 8 años</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Comic Sans MS', cursive;
+  background: linear-gradient(#fff3b0, #ffd166);
+  text-align: center;
+  overflow-x: hidden;
+}
+
+/* SOBRE */
+.envelope {
+  position: relative;
+  width: 300px;
+  height: 200px;
+  background: #ffb703;
+  margin: 80px auto;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.envelope:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-left: 150px solid transparent;
+  border-right: 150px solid transparent;
+  border-bottom: 100px solid #fb8500;
+}
+
+.card {
+  display: none;
+  margin: 20px auto;
+  background: #fff8dc;
+  padding: 25px;
+  border-radius: 25px;
+  max-width: 350px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+  animation: fadeIn 1s;
+}
+
+@keyframes fadeIn {
+  from {opacity:0; transform:scale(0.8);}
+  to {opacity:1; transform:scale(1);}
+}
+
+img {
+  width: 140px;
+  border-radius: 50%;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  animation: float 3s infinite ease-in-out;
+}
+
+@keyframes float {
+  0%,100% {transform: translateY(0);}
+  50% {transform: translateY(-10px);}
+}
+
+h1 { color: #d62828; }
+
+#countdown {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 15px;
+}
+
+.btn {
+  display: block;
+  margin: 10px auto;
+  padding: 12px;
+  width: 80%;
+  border-radius: 15px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.map { background: #ffb703; color: #5a3e1b; }
+.wa { background: #25D366; color: white; }
+
+/* GLOBOS */
+.balloon {
+  position: fixed;
+  bottom: -100px;
+  width: 30px;
+  height: 40px;
+  background: red;
+  border-radius: 50%;
+  animation: rise 6s infinite;
+}
+
+@keyframes rise {
+  from {transform: translateY(0);}
+  to {transform: translateY(-120vh);}
+}
+
+/* MIEL */
+.honey {
+  position: fixed;
+  top: -50px;
+  width: 20px;
+  height: 30px;
+  background: #ffb703;
+  border-radius: 50%;
+  animation: fall linear infinite;
+}
+
+@keyframes fall {
+  to {transform: translateY(120vh);}
+}
+</style>
+</head>
+
+<body>
+
+<!-- SOBRE -->
+<div class="envelope" onclick="abrirInvitacion()"></div>
+
+<!-- INVITACIÓN -->
+<div class="card" id="card">
+  <img src="https://i.pinimg.com/236x/b8/53/a5/b853a519399997b36a5d8fb7d6abdbda.jpg">
+
+  <h1>🍯 ¡KENIA! 🐻</h1>
+  <p>Te invita a su cumpleaños</p>
+  <h2>🎂 8 años 🎉</h2>
+
+  <p>📅 17 de abril 2026</p>
+  <p>⏰ 3:00 PM</p>
+  <p>📍 San Jerónimo Acazulco</p>
+
+  <div id="countdown"></div>
+
+  <a class="btn map" href="https://maps.app.goo.gl/ieD9N6cxqB2SbgAc6" target="_blank">
+    📍 Ver ubicación
+  </a>
+
+  <a class="btn wa" href="https://wa.me/7291638131?text=Confirmo%20asistencia%20al%20cumpleaños%20de%20Kenia">
+    ✅ Confirmar asistencia
+  </a>
+</div>
+
+<!-- MÚSICA -->
+<audio id="music" loop>
+  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3">
+</audio>
+
+<script>
+function abrirInvitacion() {
+  document.querySelector(".envelope").style.display = "none";
+  document.getElementById("card").style.display = "block";
+  document.getElementById("music").play();
+}
+
+/* COUNTDOWN */
+const eventDate = new Date("April 17, 2026 15:00:00").getTime();
+
+setInterval(() => {
+  const now = new Date().getTime();
+  const diff = eventDate - now;
+
+  const d = Math.floor(diff / (1000*60*60*24));
+  const h = Math.floor((diff / (1000*60*60)) % 24);
+  const m = Math.floor((diff / (1000*60)) % 60);
+  const s = Math.floor((diff / 1000) % 60);
+
+  document.getElementById("countdown").innerHTML =
+    ⏳ ${d}d ${h}h ${m}m ${s}s;
+}, 1000);
+
+/* GLOBOS */
+for (let i = 0; i < 10; i++) {
+  let b = document.createElement("div");
+  b.className = "balloon";
+  b.style.left = Math.random()*100 + "vw";
+  b.style.background = ["red","blue","yellow","green"][Math.floor(Math.random()*4)];
+  b.style.animationDuration = (4 + Math.random()*4) + "s";
+  document.body.appendChild(b);
+}
+
+/* MIEL */
+for (let i = 0; i < 15; i++) {
+  let h = document.createElement("div");
+  h.className = "honey";
+  h.style.left = Math.random()*100 + "vw";
+  h.style.animationDuration = (3 + Math.random()*5) + "s";
+  document.body.appendChild(h);
+}
+</script>
+
+</body>
+</html>
